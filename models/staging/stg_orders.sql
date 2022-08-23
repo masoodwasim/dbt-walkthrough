@@ -8,6 +8,7 @@ from {{ ref('raw_orders') }}
 /* Execute particular model with dependencies run command - dbt run -s +stg_orders   */
 
 select 
+{{ dbt_utils.surrogate_key(['o.orderid', 'c.customerid','p.productid']) }} AS Sky_orders,
 o.orderid,
 o.orderdate,
 o.shipdate,
