@@ -4,6 +4,7 @@ SELECT *
 FROM 
 raw.globalmart.customer
 */
+
 /*  Using Source */
 SELECT 
 * FROM
