@@ -25,12 +25,16 @@ p.productid,
 p.productname,
 p.subcategory,
 {{ markup()}} as markup,  /*using macro */
-{{markup_argument('ordersellingprice','ordercostprice')}} as markupargument /*using macro with arguments*/
+{{markup_argument('ordersellingprice','ordercostprice')}} as markupargument, /*using macro with arguments*/
+d.delivery_team
 from {{ ref('raw_orders') }} as o
 left join {{ ref('raw_customers') }} as c
 on o.customerid=c.customerid
 left join {{ ref('raw_products') }} as p
 on o.productid=p.productid
+left join {{ ref('delivery_team') }} as d 
+on d.shipmode=o.shipmode
+
 {{limit_data_in_dev('orderdate')}}  /* macro to limit the result row count */
 
 
