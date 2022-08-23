@@ -22,13 +22,15 @@ c.country,
 p.category,
 p.productid,
 p.productname,
-p.subcategory
+p.subcategory,
+{{ markup()}} as markup,  /*using macro */
+{{markup_argument('ordersellingprice','ordercostprice')}} as markupargument /*using macro with arguments*/
 from {{ ref('raw_orders') }} as o
 left join {{ ref('raw_customers') }} as c
 on o.customerid=c.customerid
 left join {{ ref('raw_products') }} as p
 on o.productid=p.productid
-
+{{limit_data_in_dev('orderdate')}}  /* macro to limit the result row count */
 
 
 
